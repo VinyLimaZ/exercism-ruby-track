@@ -1,27 +1,19 @@
 class LogLineParser
   attr_reader :line
   def initialize(line)
-    @line = sanitize(line)
+    @line = split(line)
   end
 
-  def sanitize(line)
-    line.strip
+  def split(line)
+    line.split(': ')
   end
 
   def message
-    index = line.index(' ')
-    line[index..-1].strip
+    line[1].strip
   end
 
   def log_level
-    case line[1]
-    when 'E'
-      'error'
-    when 'I'
-      'info'
-    when 'W'
-      'warning'
-    end
+    line[0][/[A-Z]+/].downcase
   end
 
   def reformat
