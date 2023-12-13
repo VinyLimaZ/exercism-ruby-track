@@ -11,11 +11,11 @@ class SimpleCalculator
     end
 
     def calc(first, second, oper)
-      division_by_zero?(second, oper) and return divided_by_zero_msg
-
       result = first.send(oper, second)
 
       "#{first} #{oper} #{second} = #{result}"
+    rescue ZeroDivisionError
+      return divided_by_zero_error_msg
     end
 
     def validate_operands!(first, second)
@@ -34,8 +34,8 @@ class SimpleCalculator
       second.zero? && oper == '/'
     end
 
-    def divided_by_zero_msg
-      "Division by zero is not allowed."
+    def divided_by_zero_error_msg
+      'Division by zero is not allowed.'
     end
   end
 end
