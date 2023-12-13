@@ -8,17 +8,10 @@ To get started with TDD, see the `README.md` file in your
 
 class Acronym
   def self.abbreviate(phrase)
-    phrase_splitted = split(phrase)
-    acronym(phrase_splitted)
+    scan(phrase).join.upcase
   end
 
-  def self.split(phrase)
-    phrase.split('-').flat_map(&:split)
-  end
-
-  def self.acronym(phrase)
-    phrase.map do |word|
-      word[0].upcase
-    end.join
+  def self.scan(phrase)
+    phrase.scan(/\b\w/)
   end
 end
